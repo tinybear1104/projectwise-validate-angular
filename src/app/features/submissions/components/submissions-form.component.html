@@ -1,0 +1,69 @@
+@if (showForm()) {
+  <div class="modal-backdrop" (click)="onCancel()"></div>
+  <div class="form-container">
+    <h2>Create New Submission</h2>
+    <form [formGroup]="submissionForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Submission Name *</mat-label>
+        <input matInput formControlName="name" required>
+        @if (submissionForm.get('name')?.touched && submissionForm.get('name')?.hasError('required')) {
+          <mat-error>Submission name is required</mat-error>
+        }
+        @if (submissionForm.get('name')?.touched && submissionForm.get('name')?.hasError('minlength')) {
+          <mat-error>Submission name must be at least 3 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Revision *</mat-label>
+        <input matInput formControlName="revision" placeholder="e.g., v1" required>
+        @if (submissionForm.get('revision')?.touched && submissionForm.get('revision')?.hasError('required')) {
+          <mat-error>Revision is required</mat-error>
+        }
+        @if (submissionForm.get('revision')?.touched && submissionForm.get('revision')?.hasError('pattern')) {
+          <mat-error>Revision must match format: v#</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Status *</mat-label>
+        <mat-select formControlName="status" required panelClass="status-dropdown-panel">
+          <mat-option value="Pending">Pending</mat-option>
+          <mat-option value="In Review">In Review</mat-option>
+          <mat-option value="Approved">Approved</mat-option>
+          <mat-option value="Rejected">Rejected</mat-option>
+        </mat-select>
+        @if (submissionForm.get('status')?.touched && submissionForm.get('status')?.hasError('required')) {
+          <mat-error>Status is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Decision *</mat-label>
+        <mat-select formControlName="decision" required panelClass="status-dropdown-panel">
+          <mat-option value="Awaiting">Awaiting</mat-option>
+          <mat-option value="Approved">Approved</mat-option>
+          <mat-option value="Rejected">Rejected</mat-option>
+        </mat-select>
+        @if (submissionForm.get('decision')?.touched && submissionForm.get('decision')?.hasError('required')) {
+          <mat-error>Decision is required</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          [disabled]="!submissionForm.valid || (loading$ | async)">
+          @if (loading$ | async) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            Save Submission
+          }
+        </button>
+        <button mat-button type="button" (click)="onCancel()" [disabled]="loading$ | async">Cancel</button>
+      </div>
+    </form>
+  </div>
+}

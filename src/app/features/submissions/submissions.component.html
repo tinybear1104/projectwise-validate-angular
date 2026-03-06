@@ -1,0 +1,14 @@
+<div class="submissions-container">
+  <div class="header">
+    <h1>Submissions</h1>
+    <button class="iui-button" (click)="formComponent.toggleForm()">Create new</button>
+  </div>
+
+  <app-submissions-form 
+    #formComponent
+    (formSubmitted)="onFormSubmitted()"
+    (formClosed)="onFormClosed()">
+  </app-submissions-form>
+
+  <app-submissions-table></app-submissions-table>
+</div>
