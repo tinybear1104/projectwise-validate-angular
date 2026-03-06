@@ -12,7 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Submission, SubmissionService } from '../../../core/services/submission.service';
+import { Submission, SubmissionService } from '../../../services/submission.service';
 
 @Component({
   selector: 'app-submissions-table',

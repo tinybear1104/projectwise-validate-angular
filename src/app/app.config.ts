@@ -5,6 +5,9 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { LoggingInterceptor } from './core/interceptors/logging.interceptor';
+import { ResponseInterceptor } from './core/interceptors/response.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +15,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAnimations(),
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor , multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor , multi: true },
   ]
 };

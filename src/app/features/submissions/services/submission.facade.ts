@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { SubmissionService, Submission } from '../../../core/services/submission.service';
+import { SubmissionService, Submission } from '../../../services/submission.service';
 import { NotificationService } from '../../../core/services/notification.service';
 
 @Injectable({ providedIn: 'root' })
