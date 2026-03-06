@@ -45,3 +45,8 @@ Thumbs.db
 
 # markdown files
 *.md
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
